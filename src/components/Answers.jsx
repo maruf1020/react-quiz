@@ -12,6 +12,7 @@ export default function Answers() {
       <CheckBox className={classes.answer} text="A New Hope 1"></CheckBox>
       <CheckBox className={classes.answer} text="A New Hope 1"></CheckBox>
       <CheckBox className={classes.answer} text="A New Hope 1"></CheckBox>
+      <CheckBox className={classes.answer} text="A New Hope 1"></CheckBox>
     </div>
   );
 }

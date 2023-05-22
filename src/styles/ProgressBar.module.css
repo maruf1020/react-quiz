@@ -32,6 +32,10 @@
     background: #47f5953a;
 }
 
+.next {
+    margin-right: 10px;
+}
+
 @media only screen and (max-width: 1024px) {
     .progressBar {
         width: calc(100vw - 60px);
