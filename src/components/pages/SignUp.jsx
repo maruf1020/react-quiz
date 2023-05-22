@@ -9,7 +9,7 @@ export default function SignUp() {
   return (
     <>
       <h1>Create an account</h1>
-      <div className={classes.column}>
+      <div className="column">
         <Illustration></Illustration>
         <Form className={classes.SignUp}>
           <TextInput
