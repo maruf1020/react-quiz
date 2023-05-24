@@ -1,4 +1,6 @@
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
+import PrivateOutlet from "../Routes/PrivateOutlet";
+import PublicOutlet from "../Routes/PublicOutlet";
 import Layout from "../components/Layout";
 import Login from "../components/pages/Login";
 import Quiz from "../components/pages/Quiz";
@@ -15,10 +17,16 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/signup" element={<SignUp />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/quiz" element={<Quiz />} />
-            <Route path="/result" element={<Result />} />
+            <Route path="/*" element={<PublicOutlet />}>
+              <Route path="signup" element={<SignUp />} />
+              <Route path="login" element={<Login />} />
+            </Route>
+            {/* <Route path="/quiz" element={<Quiz />} />
+            <Route path="/result" element={<Result />} /> */}
+            <Route path="/*" element={<PrivateOutlet />}>
+              <Route path="quiz" element={<Quiz />} />
+              <Route path="result" element={<Result />} />
+            </Route>
           </Routes>
         </Layout>
       </AuthProvider>
