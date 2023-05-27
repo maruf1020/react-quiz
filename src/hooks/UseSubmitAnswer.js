@@ -11,17 +11,14 @@ export default function useSubmitAnswer({ quesAndAns, id }) {
     useEffect(() => {
         async function submitAnswer() {
             const uid = currentUser.uid;
-
             const db = getDatabase();
-            const resultRef = ref(db, `result/${uid}`);
+            const resultRef = ref(db, `result/${uid}/${id}`);
 
             try {
                 setError(false);
                 setLoading(true);
 
-                await set(resultRef, {
-                    [id]: quesAndAns,
-                });
+                await set(resultRef, quesAndAns);
                 console.log("Answer submitted");
                 setLoading(false);
             }

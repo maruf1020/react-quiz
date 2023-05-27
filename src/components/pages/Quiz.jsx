@@ -73,11 +73,8 @@ export default function Quiz() {
     const uid = currentUser.uid;
 
     const db = getDatabase();
-    const resultRef = ref(db, `result/${uid}`);
-
-    await set(resultRef, {
-      [id.id]: quesAndAns,
-    });
+    const resultRef = ref(db, `result/${uid}/${id.id}`); // this is the way to update the existing node
+    await set(resultRef, quesAndAns);
 
     navigate(`/result/${id.id}`, {
       state: {
