@@ -10,33 +10,44 @@ export default function Result() {
   const { questions } = state || {};
 
   const { loading, error, answers } = useAnswers(id);
-
-  console.log("answers", answers, "questions", questions);
+  const totalScore = 100;
+  const minusMarkingPoint = 2;
+  let score = 0;
+  let analysisData = [];
 
   function calculateScore() {
-    console.log("calculateScore");
     let score = 0;
-    const totalScore = 100;
     const scorePerQuestion = totalScore / questions.length;
     questions.forEach((question, index) => {
-      const scorePerOption = scorePerQuestion / answers[index].options.length;
+      const scorePerOption =
+        scorePerQuestion /
+        answers[index].options.filter((option) => option.correct).length;
       question.options.forEach((option, i) => {
         if (
-          (option.checked &&
-            option.checked == true &&
-            answers[index].options[i].correct == true) ||
-          (option.checked == false && answers[index].options[i].correct == null)
+          option.checked &&
+          option.checked == true &&
+          answers[index].options[i].correct == true
         ) {
           score = score + scorePerOption;
+        } else if (
+          option.checked == true &&
+          answers[index].options[i].correct == null
+        ) {
+          score = score - minusMarkingPoint;
         }
       });
     });
+    // make 2 digit decimal
+    return Math.round(score * 100) / 100;
+  }
 
-    return { totalScore, score };
+  function resultAnalysis() {
+    return [];
   }
 
   if (answers && questions && questions.length > 0 && answers.length > 0) {
-    console.log(calculateScore());
+    score = calculateScore();
+    analysisData = resultAnalysis();
   }
 
   return (
@@ -45,8 +56,8 @@ export default function Result() {
       {error && <div>There was an error!</div>}
       {answers && questions && questions.length > 0 && answers.length > 0 && (
         <>
-          <Summary score={() => calculateScore()}></Summary>
-          <Analysis></Analysis>
+          <Summary score={score} totalScore={totalScore}></Summary>
+          <Analysis analysisData={analysisData}></Analysis>
         </>
       )}
     </>
