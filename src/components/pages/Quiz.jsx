@@ -99,6 +99,7 @@ export default function Quiz() {
           <h1>{quesAndAns[currentQuestion].title}</h1>
           <h4>Question can have multiple answers</h4>
           <Answers
+            input={true}
             options={quesAndAns[currentQuestion].options}
             handleChange={handleAnswerChange}></Answers>
           <ProgressBar

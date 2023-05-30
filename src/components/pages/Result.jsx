@@ -42,7 +42,20 @@ export default function Result() {
   }
 
   function resultAnalysis() {
-    return [];
+    // have to marge two arrays
+    return questions.map((question, index) => {
+      const options = question.options.map((option, i) => {
+        let temp = {
+          ...option,
+          ...answers[index].options[i],
+        };
+        return !temp.correct ? { ...temp, correct: false } : temp;
+      });
+      return {
+        ...question,
+        options,
+      };
+    });
   }
 
   if (answers && questions && questions.length > 0 && answers.length > 0) {
@@ -57,7 +70,10 @@ export default function Result() {
       {answers && questions && questions.length > 0 && answers.length > 0 && (
         <>
           <Summary score={score} totalScore={totalScore}></Summary>
-          <Analysis analysisData={analysisData}></Analysis>
+          <Analysis
+            analysisData={analysisData}
+            score={score}
+            totalScore={totalScore}></Analysis>
         </>
       )}
     </>
