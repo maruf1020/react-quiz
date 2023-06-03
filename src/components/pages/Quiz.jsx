@@ -107,7 +107,7 @@ export default function Quiz() {
             prev={handlePreviousQuestion}
             parentage={parentage}
             submit={handleAnswerSubmit}></ProgressBar>
-          <MiniPlayer></MiniPlayer>
+          <MiniPlayer id={id.id} title="not ok yet"></MiniPlayer>
         </>
       )}
     </>

@@ -1,10 +1,13 @@
 import { useRef, useState } from "react";
-import image from "../assets/images/3.jpg";
+import ReactPlayer from "react-player";
 import classes from "../styles/MiniPlayer.module.css";
 
-export default function MiniPlayer() {
+// eslint-disable-next-line react/prop-types
+export default function MiniPlayer({ id, title }) {
   const buttonRef = useRef();
   const [open, setOpen] = useState(false);
+  console.log(id);
+  const videoUrl = `https://www.youtube.com/watch?v=${id}`;
 
   function toggleMiniPlayer() {
     if (!open) {
@@ -32,8 +35,16 @@ export default function MiniPlayer() {
         {" "}
         close{" "}
       </span>
-      <img src={image} alt="ALT rag" />
-      <p>#23 React Hooks Bangla - React useReducer hook Bangla</p>
+      {/* <img src={image} alt="ALT rag" /> */}
+      <ReactPlayer
+        className={classes.player}
+        url={videoUrl}
+        width="100%"
+        height="100%"
+        playing={open}
+        controls={true}
+      />
+      <p>{title}</p>
     </div>
   );
 }
